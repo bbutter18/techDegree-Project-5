@@ -172,7 +172,7 @@ func swipeCheckForSeniorAdmission(for Guest: AnyDayGuest) {
     if Guest.isSenior == true {
         print("Access Granted. You are allowed Senior Admission")
     } else {
-        print("Sorry, but this pass does not qualify for free Senior Admission to the Park")
+        print("Sorry, but this pass does not qualify for Senior Admission to the Park")
     }
 }
 

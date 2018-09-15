@@ -201,6 +201,7 @@ class SeniorGuest: AnyDayGuest {
         let calendar: NSCalendar! = NSCalendar(calendarIdentifier: .gregorian)
         let presentDay = Date()
         let seniorsAge = calendar.components(.year, from: birthdayDate!, to: presentDay, options: [])
+            
         let age = seniorsAge.year
         
         return age!
@@ -208,7 +209,7 @@ class SeniorGuest: AnyDayGuest {
     
     
     func seniorsAgeVerification() {
-        if (seniorsAge(birthday: Birthday!)) <= 5 {
+        if (seniorsAge(birthday: Birthday!)) >= 60 {
             isSenior = true
             print("Senior Pass Created Successfully")
         } else {
@@ -244,9 +245,9 @@ class SeasonPassGuest: AnyDayGuest {
     var address: String?
     var city: String?
     var state: String?
-    var zipcode: Int?
+    var zipcode: String?
     
-    init?(firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipcode: Int?) throws {
+    init?(firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipcode: String?) throws {
         
         guard let firstName = firstName else {
             throw RequiredInformation.FirstNameMissing

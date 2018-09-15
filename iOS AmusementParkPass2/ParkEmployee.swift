@@ -18,7 +18,7 @@ protocol Employable {
     var address: String? { get }
     var city: String? { get }
     var state: String? { get }
-    var zipcode: Int? { get }
+    var zipcode: String? { get }
     
     var employeeType: ParkPersonType { get }
     var projectNumber: ProjectNumber? { get }
@@ -44,15 +44,17 @@ enum RequiredInformation: Error {
     case InvalidVendorCompany
     case DateOfVisitMissing
     case InvalidProjectNumber
+    
+    case InvalidEntry
 }
 
 
-enum ProjectNumber: Int {
-    case project1001 = 1001
-    case project1002 = 1002
-    case project1003 = 1003
-    case project2001 = 2001
-    case project2002 = 2002
+enum ProjectNumber: String {
+    case project1001 = "1001"
+    case project1002 = "1002"
+    case project1003 = "1003"
+    case project2001 = "2001"
+    case project2002 = "2002"
     
 }
 
@@ -72,9 +74,9 @@ class FoodService: Employable {
     var address: String?
     var city: String?
     var state: String?
-    var zipcode: Int?
+    var zipcode: String?
     
-    init?(firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipcode: Int?) throws {
+    init?(firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipcode: String?) throws {
         
         
         guard let firstName = firstName else {
@@ -143,9 +145,9 @@ class Maintenance: Employable {
     var address: String?
     var city: String?
     var state: String?
-    var zipcode: Int?
+    var zipcode: String?
     
-    init?(firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipcode: Int?) throws {
+    init?(firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipcode: String?) throws {
         
         
         guard let firstName = firstName else {
@@ -207,9 +209,9 @@ class RideService: Employable {
     var address: String?
     var city: String?
     var state: String?
-    var zipcode: Int?
+    var zipcode: String?
     
-    init?(firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipcode: Int?) throws {
+    init?(firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipcode: String?) throws {
         
         guard let firstName = firstName else {
             throw RequiredInformation.FirstNameMissing
@@ -271,9 +273,9 @@ class ShiftManager: Employable {
     var address: String?
     var city: String?
     var state: String?
-    var zipcode: Int?
+    var zipcode: String?
     
-    init?(firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipcode: Int?) throws {
+    init?(firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipcode: String?) throws {
         
         guard let firstName = firstName else {
             throw RequiredInformation.FirstNameMissing
@@ -332,6 +334,7 @@ class Vendor {
     //var vendorType: VendorType
     var accessArea: [AreaAccess] = []
     var accessRides: [RideAccess] = []
+    var parkAccessType: ParkPersonType = .Vendor
     
     var firstName: String?
     var lastName: String?
@@ -342,15 +345,15 @@ class Vendor {
     var visitDate: Date?
     
     
-    enum VendorCompany {
-        case Fedex
-        case Orkin
-        case NWElectrical
-        case Acme
+    enum VendorCompany: String {
+        case Fedex = "Fedex"
+        case Orkin = "Orkin"
+        case NWElectrical = "NWElectrical"
+        case Acme = "Acme"
     }
     
     
-    init?(firstName: String?, lastName: String?, vendorCompany: VendorCompany?, birthday: String?, visitDate: String? ) throws {
+    init?(firstName: String?, lastName: String?, vendorCompany: String?, birthday: String?, visitDate: String? ) throws {
     
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
@@ -377,7 +380,7 @@ class Vendor {
         
         self.firstName = firstName
         self.lastName = lastName
-        self.vendorCompany = vendorCompany
+        self.vendorCompany = Vendor.VendorCompany(rawValue: vendorCompany)
         self.birthday = birthday
         self.visitDate = Date()
     }
@@ -412,11 +415,11 @@ class ContractEmployee: Employable {
     var address: String?
     var city: String?
     var state: String?
-    var zipcode: Int?
+    var zipcode: String?
     
    
     
-    init?(projectNumber: Int?, firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipcode: Int?) throws {
+    init?(projectNumber: String?, firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipcode: String?) throws {
         
         guard let projectNumber = projectNumber else {
             throw RequiredInformation.InvalidProjectNumber
