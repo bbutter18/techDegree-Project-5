@@ -251,8 +251,8 @@ class ViewController: UIViewController {
         zipcodeField.isEnabled = true
         zipcodeField.backgroundColor = UIColor.white
         
-        companyField.isEnabled = true
-        companyField.backgroundColor = UIColor.white
+//        companyField.isEnabled = true
+//        companyField.backgroundColor = UIColor.white
         
         projectNum.isEnabled = true
         projectNum.backgroundColor = UIColor.white
@@ -631,6 +631,7 @@ class ViewController: UIViewController {
             }
             
             if parkPassType == .FoodService || parkPassType == .Maintenance || parkPassType == .ShiftManager || parkPassType == .RideService {
+                print("Entering employee logic")
                 if firstNameField.text == "" && lastNameField.text == "" && addressField.text == "" && cityField.text == "" && stateField.text == "" && zipcodeField.text == "" {
                     displayAlertError(with: "Error", message: "Missing All Fields")
                 } else if firstNameField.text == "" {
@@ -655,7 +656,7 @@ class ViewController: UIViewController {
                     
                     if parkPassType == .Maintenance {
                         badge = try! Maintenance(firstName: firstNameField.text, lastName: lastNameField.text, address: addressField.text, city: cityField.text, state: stateField.text, zipcode: zipcodeField.text)
-                        print("Food Service Employee Badge Generated")
+                        print("Maintenance Employee Badge Generated")
                     }
                     
                     if parkPassType == .RideService {
@@ -672,7 +673,8 @@ class ViewController: UIViewController {
           
             
             if parkPassType == .ContractEmployee {
-                if firstNameField.text == "" && lastNameField.text == "" && addressField.text == "" && cityField.text == "" && stateField.text == "" && zipcodeField.text == "" && socialSecurity.text == "" {
+                print("Entering contract employee badge logic")
+                if firstNameField.text == "" && lastNameField.text == "" && addressField.text == "" && cityField.text == "" && stateField.text == "" && zipcodeField.text == "" && projectNum.text == "" {
                     displayAlertError(with: "Error", message: "Missing All Fields")
                 } else if firstNameField.text == "" {
                     displayAlertError(with: "Error", message: "Missing First Name")
@@ -686,14 +688,14 @@ class ViewController: UIViewController {
                     displayAlertError(with: "Error", message: "Missing State")
                 } else if zipcodeField.text == "" {
                     displayAlertError(with: "Error", message: "Missing Zipcode")
-                } else if socialSecurity.text == "" {
+                } else if projectNum.text == "" {
                     displayAlertError(with: "Error", message: "Missing Project Number")
                 
-                } else if firstNameField.text != nil && lastNameField.text != nil && addressField.text != nil && cityField.text != nil && stateField.text != nil && zipcodeField.text != nil && socialSecurity.text != nil {
+                } else if firstNameField.text != nil && lastNameField.text != nil && addressField.text != nil && cityField.text != nil && stateField.text != nil && zipcodeField.text != nil && projectNum.text != nil {
                     
-                    if socialSecurity.text == "1001" || socialSecurity.text == "1002" || socialSecurity.text == "1003" || socialSecurity.text == "2002" || socialSecurity.text == "2001" {
+                    if projectNum.text == "1001" || projectNum.text == "1002" || projectNum.text == "1003" || projectNum.text == "2002" || projectNum.text == "2001" {
                     
-                    badge = try! ContractEmployee(projectNumber: socialSecurity.text, firstName: firstNameField.text, lastName: lastNameField.text, address: addressField.text, city: cityField.text, state: stateField.text, zipcode: zipcodeField.text)
+                    badge = try! ContractEmployee(projectNumber: projectNum.text, firstName: firstNameField.text, lastName: lastNameField.text, address: addressField.text, city: cityField.text, state: stateField.text, zipcode: zipcodeField.text)
                     print("Contract Employee Badge Generated")
                     } else {
                         displayAlertError(with: "Error", message: "Please enter valid project number")
@@ -702,6 +704,7 @@ class ViewController: UIViewController {
             }
             
             if parkPassType == .Vendor {
+                print("Entering Vendor ID logic")
                 if firstNameField.text == "" && lastNameField.text == "" && dateBirth.text == "" && companyField.text == "" && socialSecurity.text == "" {
                     displayAlertError(with: "Error", message: "Missing all fields")
                 } else if firstNameField.text == "" {

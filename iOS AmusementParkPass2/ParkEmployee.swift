@@ -407,7 +407,7 @@ class ContractEmployee: Employable {
     var accessArea: [AreaAccess] = []
     var accessRides: [RideAccess] = []
     
-    var projectNumber: ProjectNumber? = nil
+    var projectNumber: ProjectNumber?
     
     var firstName: String?
     var lastName: String?
@@ -419,7 +419,7 @@ class ContractEmployee: Employable {
     
    
     
-    init?(projectNumber: String?, firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipcode: String?) throws {
+    init?(projectNumber: ProjectNumber.RawValue?, firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipcode: String?) throws {
         
         guard let projectNumber = projectNumber else {
             throw RequiredInformation.InvalidProjectNumber

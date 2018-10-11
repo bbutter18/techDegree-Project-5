@@ -104,7 +104,7 @@ class PassViewController: UIViewController {
             if (vendorID?.vendorCompany)!.rawValue == "Acme" {
                 TestResultsLabel.text = "Access to Kitchen Areas Only"
             } else if (vendorID?.vendorCompany)!.rawValue == "NWElectrical" {
-                TestResultsLabel.text = "Access to Amusement park, Kitchen, Maintenance, Office and Ride Control Areas Only"
+                TestResultsLabel.text = "Access to Amusement Areas, Kitchen, Maintenance, Office and Ride Control Areas Only"
             } else if (vendorID?.vendorCompany)!.rawValue == "Fedex" {
                 TestResultsLabel.text = "Access to Maintenance and Office Areas Only"
             } else if (vendorID?.vendorCompany)!.rawValue == "Orkin" {
@@ -121,23 +121,32 @@ class PassViewController: UIViewController {
 
                 TestResultsLabel.text = "Merchandise is discounted at 25% Off Total Price and Food is discounted at 15% Off Total Price"
         
-        } else if badge?.employeeType == .ShiftManager {
+        }
+        
+        if badge?.employeeType == .ShiftManager {
            TestResultsLabel.text = "Merchandise and Food are discounted at 25% Off Total Price"
-        } else {
-            TestResultsLabel.text = "Sorry, no discounts available with this pass"
         }
         
         if pass?.parkAccessType == .VIPGuest || pass?.parkAccessType == .SeasonPassGuest {
                         print("Checking Guest Discounts...")
                     TestResultsLabel.text = "Merchandise is discounted at 20% Off and Food is discounted at 10% off"
-        } else if pass?.parkAccessType == .SeniorGuest {
+        }
+        
+        if pass?.parkAccessType == .SeniorGuest {
             TestResultsLabel.text = "Merchandise and Food are discounted at 10% Off Total Price"
-        } else {
+        }
+        
+        if pass?.parkAccessType == .ChildGuest || pass?.parkAccessType == .ClassicGuest {
             TestResultsLabel.text = "Sorry, no discounts available with this pass"
         }
         
         if vendorID?.parkAccessType == .Vendor {
             print("Checking vendor discounts...")
+            TestResultsLabel.text = "Sorry, no discounts available with this pass"
+        }
+        
+        if badge?.hasEmployeeBadge == false {
+                print("Checking contract employee discount...")
             TestResultsLabel.text = "Sorry, no discounts available with this pass"
         }
     }
@@ -158,12 +167,12 @@ class PassViewController: UIViewController {
         
             if badge?.hasEmployeeBadge == true {
                 print("Checking employee Ride Access")
-                TestResultsLabel.text = "Sorry, you cannot ride the rides or skip the lines"
+                TestResultsLabel.text = "Sorry, you cannot get on the rides and ride them or skip the lines"
             } 
             
             if vendorID?.hasEmployeeBadge == false {
                 print("Checking vendor ride access")
-                TestResultsLabel.text = "Sorry, you cannot ride the rides or skip the lines"
+                TestResultsLabel.text = "Sorry, you cannot get on the rides and ride them or skip the lines"
             }
         }
 
