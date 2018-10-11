@@ -668,8 +668,8 @@ class ViewController: UIViewController {
                         badge = try! ShiftManager(firstName: firstNameField.text, lastName: lastNameField.text, address: addressField.text, city: cityField.text, state: stateField.text, zipcode: zipcodeField.text)
                         print("Shift Manager Employee Badge Generated")
                     }
+                }
             }
-            
           
             
             if parkPassType == .ContractEmployee {
@@ -731,7 +731,7 @@ class ViewController: UIViewController {
                 
             }
                 
-            }
+            
            
             if pass != nil || badge != nil || vendorID != nil {
             
